@@ -1,0 +1,279 @@
+CREATE TABLE [usuario_inova] (
+	id_usuario integer NOT NULL,
+	nome_completo string NOT NULL,
+	sexo string NOT NULL,
+	CPF string,
+	Email string NOT NULL,
+	telefone string NOT NULL,
+	pernissao string NOT NULL,
+	ultimo_acesso datetime NOT NULL,
+	login string NOT NULL,
+	senha string NOT NULL UNIQUE,
+	descricao_perfil varchar(255) NOT NULL,
+  CONSTRAINT [PK_USUARIO_INOVA] PRIMARY KEY CLUSTERED
+  (
+  [id_usuario] ASC
+  ) WITH (IGNORE_DUP_KEY = OFF)
+
+)
+GO
+CREATE TABLE [aluno] (
+	id_aluno integer NOT NULL,
+	curso string NOT NULL,
+	projeto string NOT NULL,
+	turno string NOT NULL,
+	periodo string NOT NULL,
+	status string NOT NULL,
+	comentario varchar(255) NOT NULL,
+  CONSTRAINT [PK_ALUNO] PRIMARY KEY CLUSTERED
+  (
+  [id_aluno] ASC
+  ) WITH (IGNORE_DUP_KEY = OFF)
+
+)
+GO
+CREATE TABLE [professor] (
+	id_professor integer NOT NULL,
+	nome_completo string NOT NULL,
+	graduacao string NOT NULL,
+	mestrado string NOT NULL,
+	doutorado string NOT NULL,
+	curso string NOT NULL,
+	comentario varchar(255) NOT NULL,
+  CONSTRAINT [PK_PROFESSOR] PRIMARY KEY CLUSTERED
+  (
+  [id_professor] ASC
+  ) WITH (IGNORE_DUP_KEY = OFF)
+
+)
+GO
+CREATE TABLE [coordenador] (
+	id_coordenador integer NOT NULL,
+	nome_completo integer NOT NULL,
+	graduação string NOT NULL,
+	mestrado string NOT NULL,
+	doutorado integer NOT NULL,
+	validar_projeto boolean NOT NULL,
+	curso string NOT NULL,
+	comentario varchar(255) NOT NULL,
+  CONSTRAINT [PK_COORDENADOR] PRIMARY KEY CLUSTERED
+  (
+  [id_coordenador] ASC
+  ) WITH (IGNORE_DUP_KEY = OFF)
+
+)
+GO
+CREATE TABLE [permissao] (
+	id_permissao integer NOT NULL,
+	administrador string NOT NULL,
+	aluno string NOT NULL,
+	professor string NOT NULL,
+	coordenador string NOT NULL,
+	visitante string NOT NULL,
+	usuario string NOT NULL,
+  CONSTRAINT [PK_PERMISSAO] PRIMARY KEY CLUSTERED
+  (
+  [id_permissao] ASC
+  ) WITH (IGNORE_DUP_KEY = OFF)
+
+)
+GO
+CREATE TABLE [operacao] (
+	id_operacao integer NOT NULL,
+	incluir string NOT NULL,
+	alterar string NOT NULL,
+	excluir string NOT NULL,
+	visualizar string NOT NULL,
+	notifica string NOT NULL,
+	busca_filtrar string NOT NULL
+)
+GO
+CREATE TABLE [instituicao] (
+	id_instituicao integer NOT NULL,
+	endereço varchar(255) NOT NULL,
+	reitor string NOT NULL,
+	CNPJ string NOT NULL,
+	nome_fantasia string NOT NULL,
+	razao_social string NOT NULL,
+	telefone string NOT NULL,
+	id_coordenador integer NOT NULL,
+	id_professor integer NOT NULL,
+	id_aluno integer NOT NULL
+)
+GO
+CREATE TABLE [projeto] (
+	id_projeto integer NOT NULL,
+	tema varchar(255) NOT NULL,
+	descricao varchar(255) NOT NULL,
+	cometario varchar(255) NOT NULL,
+	status string NOT NULL,
+	resumo varchar(255) NOT NULL,
+  CONSTRAINT [PK_PROJETO] PRIMARY KEY CLUSTERED
+  (
+  [id_projeto] ASC
+  ) WITH (IGNORE_DUP_KEY = OFF)
+
+)
+GO
+CREATE TABLE [avaliacao] (
+	id_avaliacao integer NOT NULL,
+	id_projeto integer NOT NULL,
+	nota float NOT NULL,
+	cometario varchar(255) NOT NULL,
+	id_professor integer NOT NULL,
+	id_coordenador integer NOT NULL,
+  CONSTRAINT [PK_AVALIACAO] PRIMARY KEY CLUSTERED
+  (
+  [id_avaliacao] ASC
+  ) WITH (IGNORE_DUP_KEY = OFF)
+
+)
+GO
+CREATE TABLE [aluno_projeto] (
+	id_projeto integer NOT NULL,
+	id_aluno integer NOT NULL
+)
+GO
+CREATE TABLE [professor_projeto] (
+	id_professor integer NOT NULL,
+	id_projeto integer NOT NULL
+)
+GO
+CREATE TABLE [disciplina] (
+	id_disciplina integer NOT NULL,
+	Instrutor string NOT NULL,
+	sala string NOT NULL,
+	carga_horaria timestamp NOT NULL,
+	projeto integer NOT NULL,
+	id_coordenador integer NOT NULL,
+	id_professor integer NOT NULL,
+  CONSTRAINT [PK_DISCIPLINA] PRIMARY KEY CLUSTERED
+  (
+  [id_disciplina] ASC
+  ) WITH (IGNORE_DUP_KEY = OFF)
+
+)
+GO
+CREATE TABLE [aluno_disciplina] (
+	id_aluno integer NOT NULL,
+	id_disciplina integer NOT NULL
+)
+GO
+
+ALTER TABLE [aluno] WITH CHECK ADD CONSTRAINT [aluno_fk0] FOREIGN KEY ([id_aluno]) REFERENCES [usuario_inova]([id_usuario])
+ON UPDATE CASCADE
+GO
+ALTER TABLE [aluno] CHECK CONSTRAINT [aluno_fk0]
+GO
+
+ALTER TABLE [professor] WITH CHECK ADD CONSTRAINT [professor_fk0] FOREIGN KEY ([id_professor]) REFERENCES [usuario_inova]([id_usuario])
+ON UPDATE CASCADE
+GO
+ALTER TABLE [professor] CHECK CONSTRAINT [professor_fk0]
+GO
+
+ALTER TABLE [coordenador] WITH CHECK ADD CONSTRAINT [coordenador_fk0] FOREIGN KEY ([id_coordenador]) REFERENCES [usuario_inova]([id_usuario])
+ON UPDATE CASCADE
+GO
+ALTER TABLE [coordenador] CHECK CONSTRAINT [coordenador_fk0]
+GO
+ALTER TABLE [coordenador] WITH CHECK ADD CONSTRAINT [coordenador_fk1] FOREIGN KEY ([validar_projeto]) REFERENCES [projeto]([id_projeto])
+ON UPDATE CASCADE
+GO
+ALTER TABLE [coordenador] CHECK CONSTRAINT [coordenador_fk1]
+GO
+
+ALTER TABLE [permissao] WITH CHECK ADD CONSTRAINT [permissao_fk0] FOREIGN KEY ([id_permissao]) REFERENCES [usuario_inova]([id_usuario])
+ON UPDATE CASCADE
+GO
+ALTER TABLE [permissao] CHECK CONSTRAINT [permissao_fk0]
+GO
+
+ALTER TABLE [operacao] WITH CHECK ADD CONSTRAINT [operacao_fk0] FOREIGN KEY ([id_operacao]) REFERENCES [permissao]([id_permissao])
+ON UPDATE CASCADE
+GO
+ALTER TABLE [operacao] CHECK CONSTRAINT [operacao_fk0]
+GO
+
+ALTER TABLE [instituicao] WITH CHECK ADD CONSTRAINT [instituicao_fk0] FOREIGN KEY ([id_coordenador]) REFERENCES [coordenador]([id_coordenador])
+ON UPDATE CASCADE
+GO
+ALTER TABLE [instituicao] CHECK CONSTRAINT [instituicao_fk0]
+GO
+ALTER TABLE [instituicao] WITH CHECK ADD CONSTRAINT [instituicao_fk1] FOREIGN KEY ([id_professor]) REFERENCES [professor]([id_professor])
+ON UPDATE CASCADE
+GO
+ALTER TABLE [instituicao] CHECK CONSTRAINT [instituicao_fk1]
+GO
+ALTER TABLE [instituicao] WITH CHECK ADD CONSTRAINT [instituicao_fk2] FOREIGN KEY ([id_aluno]) REFERENCES [aluno]([id_aluno])
+ON UPDATE CASCADE
+GO
+ALTER TABLE [instituicao] CHECK CONSTRAINT [instituicao_fk2]
+GO
+
+
+ALTER TABLE [avaliacao] WITH CHECK ADD CONSTRAINT [avaliacao_fk0] FOREIGN KEY ([id_projeto]) REFERENCES [projeto]([id_projeto])
+ON UPDATE CASCADE
+GO
+ALTER TABLE [avaliacao] CHECK CONSTRAINT [avaliacao_fk0]
+GO
+ALTER TABLE [avaliacao] WITH CHECK ADD CONSTRAINT [avaliacao_fk1] FOREIGN KEY ([id_professor]) REFERENCES [professor]([id_professor])
+ON UPDATE CASCADE
+GO
+ALTER TABLE [avaliacao] CHECK CONSTRAINT [avaliacao_fk1]
+GO
+ALTER TABLE [avaliacao] WITH CHECK ADD CONSTRAINT [avaliacao_fk2] FOREIGN KEY ([id_coordenador]) REFERENCES [coordenador]([id_coordenador])
+ON UPDATE CASCADE
+GO
+ALTER TABLE [avaliacao] CHECK CONSTRAINT [avaliacao_fk2]
+GO
+
+ALTER TABLE [aluno_projeto] WITH CHECK ADD CONSTRAINT [aluno_projeto_fk0] FOREIGN KEY ([id_projeto]) REFERENCES [projeto]([id_projeto])
+ON UPDATE CASCADE
+GO
+ALTER TABLE [aluno_projeto] CHECK CONSTRAINT [aluno_projeto_fk0]
+GO
+ALTER TABLE [aluno_projeto] WITH CHECK ADD CONSTRAINT [aluno_projeto_fk1] FOREIGN KEY ([id_aluno]) REFERENCES [aluno]([id_aluno])
+ON UPDATE CASCADE
+GO
+ALTER TABLE [aluno_projeto] CHECK CONSTRAINT [aluno_projeto_fk1]
+GO
+
+ALTER TABLE [professor_projeto] WITH CHECK ADD CONSTRAINT [professor_projeto_fk0] FOREIGN KEY ([id_professor]) REFERENCES [professor]([id_professor])
+ON UPDATE CASCADE
+GO
+ALTER TABLE [professor_projeto] CHECK CONSTRAINT [professor_projeto_fk0]
+GO
+ALTER TABLE [professor_projeto] WITH CHECK ADD CONSTRAINT [professor_projeto_fk1] FOREIGN KEY ([id_projeto]) REFERENCES [projeto]([id_projeto])
+ON UPDATE CASCADE
+GO
+ALTER TABLE [professor_projeto] CHECK CONSTRAINT [professor_projeto_fk1]
+GO
+
+ALTER TABLE [disciplina] WITH CHECK ADD CONSTRAINT [disciplina_fk0] FOREIGN KEY ([projeto]) REFERENCES [projeto]([id_projeto])
+ON UPDATE CASCADE
+GO
+ALTER TABLE [disciplina] CHECK CONSTRAINT [disciplina_fk0]
+GO
+ALTER TABLE [disciplina] WITH CHECK ADD CONSTRAINT [disciplina_fk1] FOREIGN KEY ([id_coordenador]) REFERENCES [coordenador]([id_coordenador])
+ON UPDATE CASCADE
+GO
+ALTER TABLE [disciplina] CHECK CONSTRAINT [disciplina_fk1]
+GO
+ALTER TABLE [disciplina] WITH CHECK ADD CONSTRAINT [disciplina_fk2] FOREIGN KEY ([id_professor]) REFERENCES [professor]([id_professor])
+ON UPDATE CASCADE
+GO
+ALTER TABLE [disciplina] CHECK CONSTRAINT [disciplina_fk2]
+GO
+
+ALTER TABLE [aluno_disciplina] WITH CHECK ADD CONSTRAINT [aluno_disciplina_fk0] FOREIGN KEY ([id_aluno]) REFERENCES [aluno]([id_aluno])
+ON UPDATE CASCADE
+GO
+ALTER TABLE [aluno_disciplina] CHECK CONSTRAINT [aluno_disciplina_fk0]
+GO
+ALTER TABLE [aluno_disciplina] WITH CHECK ADD CONSTRAINT [aluno_disciplina_fk1] FOREIGN KEY ([id_disciplina]) REFERENCES [disciplina]([id_disciplina])
+ON UPDATE CASCADE
+GO
+ALTER TABLE [aluno_disciplina] CHECK CONSTRAINT [aluno_disciplina_fk1]
+GO
+
