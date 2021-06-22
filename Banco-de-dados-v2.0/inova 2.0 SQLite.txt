@@ -1,0 +1,121 @@
+CREATE TABLE usuario_inova (
+	id_usuario integer PRIMARY KEY AUTOINCREMENT,
+	nome_completo string,
+	sexo string,
+	CPF string,
+	Email string,
+	telefone string,
+	pernissao string,
+	ultimo_acesso datetime PRIMARY KEY AUTOINCREMENT,
+	login string,
+	senha string,
+	descricao_perfil varchar
+);
+
+CREATE TABLE aluno (
+	id_aluno integer PRIMARY KEY AUTOINCREMENT,
+	curso string,
+	projeto string,
+	turno string,
+	periodo string,
+	status string,
+	comentario varchar
+);
+
+CREATE TABLE professor (
+	id_professor integer PRIMARY KEY AUTOINCREMENT,
+	nome_completo string,
+	graduacao string,
+	mestrado string,
+	doutorado string,
+	curso string,
+	comentario varchar
+);
+
+CREATE TABLE coordenador (
+	id_coordenador integer PRIMARY KEY AUTOINCREMENT,
+	nome_completo integer,
+	graduação string,
+	mestrado string,
+	doutorado integer,
+	validar_projeto boolean,
+	curso string,
+	comentario varchar
+);
+
+CREATE TABLE permissao (
+	id_permissao integer PRIMARY KEY AUTOINCREMENT,
+	administrador string,
+	aluno string,
+	professor string,
+	coordenador string,
+	visitante string,
+	usuario string
+);
+
+CREATE TABLE operacao (
+	id_operacao integer,
+	incluir string,
+	alterar string,
+	excluir string,
+	visualizar string,
+	notifica string,
+	busca_filtrar string
+);
+
+CREATE TABLE instituicao (
+	id_instituicao integer,
+	endereço varchar,
+	reitor string,
+	CNPJ string,
+	nome_fantasia string,
+	razao_social string,
+	telefone string,
+	id_coordenador integer,
+	id_professor integer,
+	id_aluno integer
+);
+
+CREATE TABLE projeto (
+	id_projeto integer PRIMARY KEY AUTOINCREMENT,
+	tema varchar,
+	descricao varchar,
+	cometario varchar,
+	status string,
+	resumo varchar
+);
+
+CREATE TABLE avaliacao (
+	id_avaliacao integer PRIMARY KEY AUTOINCREMENT,
+	id_projeto integer,
+	nota float,
+	cometario varchar,
+	id_professor integer,
+	id_coordenador integer
+);
+
+CREATE TABLE aluno_projeto (
+	id_projeto integer PRIMARY KEY AUTOINCREMENT,
+	id_aluno integer
+);
+
+CREATE TABLE professor_projeto (
+	id_professor integer PRIMARY KEY AUTOINCREMENT,
+	id_projeto integer
+);
+
+CREATE TABLE disciplina (
+	id_disciplina integer PRIMARY KEY AUTOINCREMENT,
+	Instrutor string,
+	sala string,
+	carga_horaria timestamp,
+	projeto integer,
+	id_coordenador integer,
+	id_professor integer
+);
+
+CREATE TABLE aluno_disciplina (
+	id_aluno integer PRIMARY KEY AUTOINCREMENT,
+	id_disciplina integer
+);
+

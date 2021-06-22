@@ -1,0 +1,25 @@
+
+<h1>Projetos</h1>
+{{#each posts}}
+    
+    <h1>{{dataValues.tema}}</h1>
+    <p>Descrição: <br>{{dataValues.descricao}}</p>
+    <p>Disciplina que pode ajudar no projeto: <br>{{dataValues.cometario}}</p>
+    <p>Status: <br>{{dataValues.status}}</p>
+    <p>Resumo: <br>{{dataValues.resumo}}</p>
+    <a href="/deletar/{{dataValues.id_projeto}}"><button>Deletar</button></a>
+    <a href="/editar/{{dataValues.id_projeto}}"><button>Editar</button></a>
+    <hr>
+{{/each}}
+
+
+    
+
+
+
+
+
+
+
+
+

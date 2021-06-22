@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styleuser">
+    <title>Document</title>
+</head>
+<body>
+    
+
+            <!-- BARRA DE MENU-->
+            <ul id="menu-top">
+                
+                <h2 class="inova">INOVA</h2>
+                
+            </ul>
+
+            <!-- PERFIL-->
+                    
+                    
+        <div class="container">
+        
+            <img class="logoimg" src="css/{{img}}" alt="">
+            </div>
+
+                                
+        </div>
+
+            <!-- STATUS-->
+            
+            <div class="form" action="">
+            
+                <ul id="espec">
+                    <hr>
+                    <li class="aceito"><a href="/aceitos">Aceitos</li></a>
+                    <li class="em_andamento"><a href="/negados">Negados</li></a>
+                    <li class="finalizado"><a href="/analise">Em analise</li></a>
+                    <li class="finalizado"><a href="/">Mostrar todos</li></a>
+                    <hr>
+                </ul>
+
+            </div>
+            <!-- BUTTONS-->
+                
+            <div class="perfil">
+
+                
+                
+                <div class="projetos">
+                  <h2>{{tipo}} </h2>
+                </div>
+                {{#each posts}}
+                <div class="new_project1">
+                    <a href="/detalhe/{{dataValues.id_projeto}}">
+                        <small>{{dataValues.createdAt}}</small>
+                        <p>{{dataValues.nome_completo}} </p>
+                    </a>
+                </div>
+                {{/each}}
+            
+            </div>
+       
+        </body>
+        </html>

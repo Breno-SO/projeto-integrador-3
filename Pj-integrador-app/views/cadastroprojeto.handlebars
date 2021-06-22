@@ -1,0 +1,57 @@
+
+
+    <form class= "form" action="/add" method="POST">
+
+        <div class= "card">
+            
+            <div class= "cardtop">
+                <img src="css/{{img}}" class="logotop">
+                <h1>PROJETO INOVA</h1>
+                <h2 class="titulo">Pagina de cadastro de projetos</h2>             
+            </div>
+
+           
+
+
+            <div class="cardgrupo">
+                <label>Nome</label> 
+                <input type="text" name="nome_completo" placeholder="Digite seu nome completo" required>
+             </div>
+
+             <div class="cardgrupo">
+                <label>Telefone</label> 
+                <input type="text" name="telefone" placeholder="Digite seu numero de contato" required>
+             </div>
+           
+            <div class="cardgrupo">
+               <label>Email</label> 
+               <input type="email" name="email" placeholder="Digite seu email" required>
+            </div>
+
+            <div class="cardgrupo">
+                <label>Empresa que você esta representando</label> 
+                <input type="text" name="organizacao" placeholder="Digite o nome da empresa que você representa" required>
+            </div>
+
+            <div class="cardgrupo">
+                <label>Contato no Unisales</label> 
+                <input type="text" name="contato_unisales" placeholder="Nome da pessoa que você tem contato no Unisales" required>
+            </div>
+
+            <div class="cardgrupo">
+                <label>Descrição da questão a ser  solucionada pelos estudantes do Unisales</label> 
+                <textarea name="descricao"cols="50" rows="7" required></textarea>
+            </div>
+
+            <div class="cardgrupo">
+                <label>O que espera receber dos estudantes?</label> 
+                <textarea name="produto"cols="50" rows="7" required></textarea>
+            </div>
+
+            <div class="cardgrupo btn">
+            <button id="botao" type="submit"><b>CONFIRMAR</b></button>
+            </div>
+
+        </div>
+    
+    </form>    

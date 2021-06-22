@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+    
+
+<style>
+    body {
+    color: #ffffff;
+    margin: 0 auto;
+    padding: 0;
+    background-color:rgb(31, 30, 30);
+}
+
+
+.container{
+
+margin-left: 20%;
+}
+
+.img-profile {
+    margin-top: 5%;
+    width: 10%;
+    border-radius: 50%;
+    
+}
+
+
+#menu-top{
+    position: fixed;
+    margin-top: 0px;
+    background-color:#1b1b1b;
+    text-align: center;
+    list-style: none;
+    width: 100%;
+}
+
+.logotop{
+    margin-top: 10px;
+    width: 120px;
+}
+
+.inova{
+    color: #c75858;
+    display: inline;
+
+}
+
+.menu{
+
+    padding-right: 20%;
+}
+
+.ntfc {
+
+    padding-left: 20px ;
+}
+#menu-top li{
+    display: inline;
+    padding: 10px;
+}
+
+#menu-top li a {
+    color: #ffffff;
+    padding: 10px;
+    display:inline-block;
+    text-decoration: none;
+}
+
+#espec {
+    padding-bottom: 25px;
+    background-color: rgb(31, 30, 30);
+    text-align: center;
+    list-style-type: none;
+    margin: 0% 20% 0% 20%;
+}
+
+#espec li{
+    display: inline;
+}
+
+#espec li a {
+    color: #ffffff;
+    padding: 10px;
+    display:inline-block;
+    text-decoration: none;
+}
+
+.topo1{
+    color: #ffffff;
+    background-color:rgb(31, 30, 30);
+    border-bottom: 1px solid #333333;
+    padding: 20px;
+}
+
+.perfil{
+    color: #ffffff;
+    background-color:rgb(31, 30, 30);
+    border-bottom: 1px solid #333333;
+    padding: 20px;
+    margin: 0% 20% 0% 20%;
+}
+
+.new_project > button {
+    background-color: #f5f5f5;
+    margin-top: 10px;
+    width: 100%;
+    padding: 15px;
+    color: rgb(24, 24, 24);
+    outline: 0;
+    border-bottom: 5px;
+}
+
+.new_project1 > button {
+    margin-top: 10px;
+    width: 100%;
+    padding: 15px;
+    color: rgb(24, 24, 24);
+    outline: 0;
+    background-image: linear-gradient(to right, rgb(204, 204, 204), #5c5c5c );
+    border-bottom: 5px;
+}
+
+.new_project2 > button {
+    margin-top: 10px;
+    width: 100%;
+    padding: 15px;
+    color: rgb(24, 24, 24);
+    outline: 0;
+    background-image: linear-gradient(to right, rgb(204, 204, 204), #5c5c5c );
+    border-bottom: 5px;
+}
+
+.new_project3 > button {
+    margin-top: 10px;
+    width: 100%;
+    padding: 15px;
+    color: rgb(24, 24, 24);
+    outline: 0;
+    background-image: linear-gradient(to right, rgb(204, 204, 204), #5c5c5c );
+    border-bottom: 5px;
+}
+
+.new_project4 > button {
+    margin-top: 10px;
+    width: 100%;
+    padding: 15px;
+    color: rgb(24, 24, 24);
+    outline: 0;
+    background-image: linear-gradient(to right, rgb(204, 204, 204), #5c5c5c );
+    border-bottom: 5px;
+}
+
+.btn button:hover {
+
+    background-color: rgb(24, 24, 24);    
+    border-bottom: 2px solid #383838 ;
+}
+.postagem{
+    color: white;
+    width: 100%;
+}
+input[type=submit] {
+  background-color: #04AA6D;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+
+</style>
+</head>
+    <body>
+
+            <!-- BARRA DE MENU-->
+            <ul id="menu-top">
+                
+                <h2 class="inova">INOVA</h2>
+                
+            </ul>
+
+            <!-- PERFIL-->
+                    
+
+
+            
+            <div class="form" action="">
+            
+                <ul id="espec">
+                    <li class="aceito"><a href="/aceitos">Aceitos</li></a>
+                    <li class="em_andamento"><a href="/negados">Negados</li></a>
+                    <li class="finalizado"><a href="/analise">Em analise</li></a>
+                    <li class="finalizado"><a href="/">Mostrar todos</li></a>
+                </ul>
+
+            </div>
+            <!-- BUTTONS-->
+                
+            <div class="perfil">
+
+                
+                
+                <hr>
+                {{#each posts}}
+                <div class="postagem">
+                    <p>Nome: {{dataValues.nome_completo}}</p>
+                    <p>Descrição da questão a ser  solucionada pelos estudantes do Unisales: 
+                        <br>{{dataValues.descricao}}</p>
+                    <p>O que espera receber dos estudantes? <br>{{dataValues.produto}}</p>
+                    <p>Telefone: <br>{{dataValues.telefone}}</p>
+                    <p>Email: <br>{{dataValues.email}}</p>
+                    <p>Empresa que representa: <br>{{dataValues.organizacao}}</p>
+                    <p>Contato no Unisales: <br>{{dataValues.contato_unisales}}</p>
+                    <form action="/att" method="POST">
+                    <label for="situacao">Avaliação</label>
+                        <select id="situacao" name="situacao">
+                            <option value="Aprovado">Aprovar</option>
+                            <option value="Recusado">Recusar</option>
+                        </select>
+                    <button type="submit">Avaliar</button>
+                    </form>
+                </div>
+                {{/each}}
+            
+            </div>
+       
+</body>
+</html>
